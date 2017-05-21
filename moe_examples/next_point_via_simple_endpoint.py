@@ -41,7 +41,7 @@ def run_example(num_points_to_sample=20, verbose=True, **kwargs):
         value_of_next_point = function_to_minimize(next_point_to_sample)
 
         if verbose:
-            print "Sampled f({0:s}) = {1:.18E}".format(str(next_point_to_sample), value_of_next_point)
+            print("Sampled f({0:s}) = {1:.18E}".format(str(next_point_to_sample), value_of_next_point))
 
         # Add the information about the point to the experiment historical data to inform the GP
         exp.historical_data.append_sample_points([SamplePoint(next_point_to_sample, value_of_next_point, 0.01)])  # We can add some noise

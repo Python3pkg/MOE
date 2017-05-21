@@ -27,7 +27,7 @@ def run_example(verbose=True, **kwargs):
             )
 
     if verbose:
-        print covariance_info
+        print(covariance_info)
 
 
 if __name__ == '__main__':

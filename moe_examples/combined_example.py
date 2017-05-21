@@ -60,15 +60,15 @@ def run_example(
     # Note that the more specific kwargs take precedence (and will override general kwargs)
     if gp_next_points_kwargs is None:
         gp_next_points_kwargs = {}
-    gp_next_points_kwargs = dict(kwargs.items() + gp_next_points_kwargs.items())
+    gp_next_points_kwargs = dict(list(kwargs.items()) + list(gp_next_points_kwargs.items()))
 
     if gp_hyper_opt_kwargs is None:
         gp_hyper_opt_kwargs = {}
-    gp_hyper_opt_kwargs = dict(kwargs.items() + gp_hyper_opt_kwargs.items())
+    gp_hyper_opt_kwargs = dict(list(kwargs.items()) + list(gp_hyper_opt_kwargs.items()))
 
     if gp_mean_var_kwargs is None:
         gp_mean_var_kwargs = {}
-    gp_mean_var_kwargs = dict(kwargs.items() + gp_mean_var_kwargs.items())
+    gp_mean_var_kwargs = dict(list(kwargs.items()) + list(gp_mean_var_kwargs.items()))
 
     exp = Experiment([[0, 2], [0, 4]])
     # Bootstrap with some known or already sampled point(s)
@@ -83,7 +83,7 @@ def run_example(
             covariance_info = gp_hyper_opt(exp.historical_data.to_list_of_sample_points(), testapp=testapp, **gp_hyper_opt_kwargs)
 
             if verbose:
-                print "Updated covariance_info with {0:s}".format(str(covariance_info))
+                print("Updated covariance_info with {0:s}".format(str(covariance_info)))
         # Use MOE to determine what is the point with highest Expected Improvement to use next
         next_point_to_sample = gp_next_points(
                 exp,
@@ -95,7 +95,7 @@ def run_example(
         value_of_next_point = function_to_minimize(next_point_to_sample)
 
         if verbose:
-            print "Sampled f({0:s}) = {1:.18E}".format(str(next_point_to_sample), value_of_next_point)
+            print("Sampled f({0:s}) = {1:.18E}".format(str(next_point_to_sample), value_of_next_point))
 
         # Add the information about the point to the experiment historical data to inform the GP
         exp.historical_data.append_sample_points([[next_point_to_sample, value_of_next_point, 0.01]])  # We can add some noise
@@ -109,7 +109,7 @@ def run_example(
             )
 
     if verbose:
-        print "GP mean at (0, 0), (0.1, 0.1), ...: {0:s}".format(str(mean))
+        print("GP mean at (0, 0), (0.1, 0.1), ...: {0:s}".format(str(mean)))
 
 
 if __name__ == '__main__':
